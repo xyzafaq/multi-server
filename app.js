@@ -10,7 +10,7 @@ require('./Database/connec')    //Database connected file
 app.use(require('./pages/Pages'));  //Accessing router exported from Pages
 
 dotenv.config({path:'./config.env'});   //Giving path of config.env file
-const PORT = process.env.PORT;   //Accessing PORT from env file
+const PORT = 80;   //Accessing PORT from env file
 
 // if( process.env.NODE_ENV == "production"){
 //     app.use(express.static("client/build"));
