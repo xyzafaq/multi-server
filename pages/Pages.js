@@ -82,7 +82,7 @@ router.get('/isloggedin', async (req,res)=>{
     try {
         const token = req.cookies.jwttoken;
         if(token){
-            const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+            const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
             const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});
             if(rootUser){
                 if(rootUser.email == "xyzafaq@gmail.com"){
@@ -137,7 +137,7 @@ router.post('/bankinfo', async (req,res)=>{
     try {
         const { fullname, bankname, iban, phone, country } = req.body;
         const token = req.cookies.jwttoken; 
-        const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+        const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
         const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});
         // console.log(rootUser);
         const result = await UserModel.updateOne({_id:rootUser._id},{ $set:{fullname, bankname, iban, phone, country}});
@@ -154,7 +154,7 @@ router.post('/withdrawrequest', async (req,res)=>{
         console.log(req.body);
         const { withdraw } = req.body;
         const token = req.cookies.jwttoken; 
-        const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+        const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
         const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});
         // console.log(rootUser);
         // const result = await UserModel.updateOne({ _id: rootUser._id }, { $set: { withdraws: [] } });
@@ -215,7 +215,7 @@ router.get('/getuserdata/:id',async (req,res)=>{
 router.get('/logout',async(req,res)=>{
     try {
         const token = req.cookies.jwttoken; 
-        const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+        const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
         const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});
         if(rootUser){
             res.clearCookie('jwttoken');
@@ -230,7 +230,7 @@ router.post('/addmember', async (req,res)=>{
         // console.log(req.params.id);
         // console.log(req.body);    
         const token = req.cookies.jwttoken; 
-        const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+        const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
         const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});  // current active user
         
         const {name,email,password,confirmpassword,birthday} = req.body;
@@ -344,7 +344,7 @@ router.post('/updatePassword',async(req,res)=>{
             res.send({msg:"Password must contain 8 characters"})
         }
         const token = req.cookies.jwttoken; 
-        const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+        const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
         const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});
         const veriFyoldPassword = await bcrypt.compare(oldPassword,rootUser.password);
         if(veriFyoldPassword){
@@ -364,7 +364,7 @@ router.post('/updatePassword',async(req,res)=>{
 router.get('/userData',async (req,res)=>{
     try {
         const token = req.cookies.jwttoken; 
-        const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+        const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
         const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});
         if(rootUser){
             res.send(rootUser);
@@ -400,7 +400,7 @@ router.get('/deleteWithdrawReq/:id',async (req,res)=>{
 router.get('/checkAdmin', async (req,res)=>{
     try {
         const token = req.cookies.jwttoken; 
-        const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+        const verifyToken = jwt.verify(token,"helloiamafaqstudentofuniversityofmanagementandtechonology");
         const rootUser = await UserModel.findOne({_id:verifyToken._id,"tokens.token":token});
         if(rootUser.email == "xyzafaq@gmail.com"){
             res.send({msg:"admin"});
